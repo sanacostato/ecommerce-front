@@ -1,5 +1,6 @@
-import { useState, useContext } from 'react';
-
+import { useState } from 'react';
+import { loginService } from '../../services/Auth.service';
+import Swal from 'sweetalert2';
 
 function Login() {
 
@@ -19,6 +20,23 @@ function Login() {
   async function loginForm(event) {
     event.preventDefault();
     console.log(formulario);
+    loginService(formulario)
+                .then(response => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Mensaje',
+                        text: 'Usuario logeado correctamente',
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Mensaje',
+                        text: 'Usuario o contraseña incorrectos',
+                    });
+                    // error.response.data.msg
+                })
   }
 
   return (

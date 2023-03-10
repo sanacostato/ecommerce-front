@@ -1,5 +1,6 @@
-import { useState, useContext } from 'react';
-
+import { useState } from 'react';
+import { registerService } from '../../services/Auth.service';
+import Swal from 'sweetalert2';
 
 function Signup() {
 
@@ -19,14 +20,31 @@ function Signup() {
   }
 
 
-  async function loginForm(event) {
+  async function signUpForm(event) {
     event.preventDefault();
     console.log(formulario);
+    registerService(formulario)
+    .then(response => {
+        console.log(response);
+        Swal.fire({
+            icon: 'success',
+            title: 'Mensaje',
+            text: 'Usuario registrado correctamente',
+        });
+    })
+    .catch(error => {
+        console.log(error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Mensaje',
+            text: 'Error al registrar usuario',
+        });
+    })
   }
 
   return (
     <div className='d-flex justify-content-center align-items-center' style={{height:"60vh"}}>
-      <form onSubmit={loginForm} style={{width:"30rem"}}>
+      <form onSubmit={signUpForm} style={{width:"30rem"}}>
         <h3 className="mt-6 mb-4 display-5 text-center">Registro de usuarios</h3>
         <div className="form-floating mb-4">
           <input type="text" className="form-control" id="inputNombre" name="nombre" value={formulario.nombre} onChange={handleInputChange} />

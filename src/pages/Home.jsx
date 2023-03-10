@@ -22,7 +22,7 @@ const Home = () => {
                             <div className="row">
                                 {products.map((product) => {
                                     return (
-                                        <div className="col-sm-4" key={product}>
+                                        <div className="col-sm-6 col-md-4" key={product}>
                                             <div className="card mb-4">
                                                 <img src="https://picsum.photos/200/150" className="card-img-top" alt='test' />
 
